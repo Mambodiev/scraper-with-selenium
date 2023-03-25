@@ -1,14 +1,10 @@
 from selenium import webdriver
 from lxml import html
 from time import sleep
-# from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
-
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-
-# driver = webdriver.Chrome(ChromeDriverManager().install())
 
 s = Service('/tmp/chromedriver')
 driver = webdriver.Chrome(service=s)
@@ -30,7 +26,6 @@ for page_nb in range(1,2):
             price = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//div[@class='manhattan--price-sale--1CCSZfK']")))
         except:
             price = None
-
         try:
             review = product_tree.xpath(".//span[@class='manhattan--evaluation--3cSMntr']/text()") 
         except:
@@ -39,7 +34,6 @@ for page_nb in range(1,2):
             nb_sold = product_tree.xpath('.//span[@class="manhattan--trade--2PeJIEB"]/text()')
         except:
             nb_sold = None
-
             
         print(title, price.text, review, nb_sold) 
 
